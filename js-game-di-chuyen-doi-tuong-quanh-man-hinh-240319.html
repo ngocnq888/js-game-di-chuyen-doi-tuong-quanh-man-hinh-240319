@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Game By Brian</title>
+  </head>
+  <body>
+    <div id="game"></div>
+    <script >
+      function Hero(image, top,left, size,speed){
+        this.image = image;
+        this.top = top;
+        // this.down = down;
+        this.left = left;
+        // this.right = right;
+        this.size = size;
+        this.speed = speed;
+
+        this.getHeroElement = function(){
+          return '<img width="'+ this.size + '"' +
+                  ' height="'+ this.size + '"' +
+                  ' src="' + this.image +'"' +
+                  ' style="top: '+this.top+'px;' + 'left:'+this.left+'px;' + 'position:absolute;" />';
+        };
+
+        this.moveRight = function(){
+          this.left += this.speed;
+          console.log('ok: ' + this.left);
+        };
+        this.moveDown = function(){
+          this.top += this.speed;
+          console.log('ok: ' + this.down);
+        };
+        this.moveTop = function(){
+          this.top -= this.speed;
+          console.log('ok: ' + this.down);
+        };
+         this.moveLeft = function () {
+           this.left -= this.speed;
+         };
+
+      }
+
+      var hero = new Hero('maria-ozawa.png', 0, 0, 100,30);
+      function start(){
+        // var c = hero.top < screen.innerHeight - hero.size;
+        // var d = hero.down < screen.width - hero.size;
+        if((hero.left < window.innerWidth - hero.size)&&(hero.top === 0)){
+          hero.moveRight();
+          console.log('oK: ' + hero.getHeroElement());
+        }
+        else if ((hero.top < window.innerHeight - hero.size)&& !(hero.left < window.innerWidth - hero.size)){
+          hero.moveDown();
+          console.log('oK: ' + hero.getHeroElement());
+        }
+        else if (hero.left > 0){
+          hero.moveLeft();
+          console.log('oK: ' + hero.getHeroElement());
+        }
+        else if(hero.top > 0) {
+          hero.moveTop();
+          console.log('oK: ' + hero.getHeroElement());
+        }
+
+        document.getElementById('game').innerHTML = hero.getHeroElement();
+        setTimeout(start, 100)
+        }
+
+      start();
+    </script>
+  </body>
+</html>
